@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
@@ -14,10 +13,14 @@ module.exports = function(grunt) {
       }
     },
     uglify: {
-      my_target: {
-        files: {
-          './src/javascripts/jquery.tocify.min.js': ['./src/javascripts/jquery.tocify.js']
-        }
+      dist: {
+        files: [{
+          expand: true,
+          cwd: './src/js',
+          src: ['*.js', '!*.min.js'],
+          dest: 'dist/',
+          ext: '.min.js'
+        }]
       },
       options: {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -26,13 +29,28 @@ module.exports = function(grunt) {
         '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
         ' Licensed <%= _.map(pkg.licenses, "type").join(", ") %>*/\n'
       }
+    },
+    cssmin: {
+      options: {
+        mergeIntoShorthands: false,
+        roundingPrecision: -1
+      },
+      target: {
+        files: [{
+          expand: true,
+          cwd: './src/css',
+          src: ['*.css', '!*.min.css'],
+          dest: 'dist/',
+          ext: '.min.css'
+        }]
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.registerTask('test', ['jshint']);
-  grunt.registerTask('build', ['uglify']);
+  grunt.registerTask('build', ['uglify', 'cssmin']);
   grunt.registerTask('default', ['test', 'build']);
-
 };

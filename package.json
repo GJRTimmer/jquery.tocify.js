@@ -19,8 +19,14 @@
   "license": "MIT",
   "devDependencies": {
     "grunt": "~1.0.4",
-    "grunt-contrib-uglify": "~4.0.1",
-    "grunt-contrib-jshint": "~2.1.0"
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-jshint": "~2.1.0",
+    "grunt-contrib-uglify": "~4.0.1"
   },
-  "keywords": ["jQuery", "jQueryUI", "Twitter Bootstrap", "Table of Contents Plugin"]
+  "keywords": [
+    "jQuery",
+    "jQueryUI",
+    "Twitter Bootstrap",
+    "Table of Contents Plugin"
+  ]
 }
